@@ -1,5 +1,5 @@
-import Hero from "./components/HomePage/Hero"
-import Recomended from "./components/HomePage/Recomended"
+import Hero from "@/components/HomePage/Hero";
+import Recomended from "@/components/HomePage/Recomended";
 
 export default function Home() {
   return (
@@ -7,5 +7,5 @@ export default function Home() {
       <Hero />
       <Recomended />
     </main>
-  )
+  );
 }
