@@ -9,7 +9,7 @@ const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] })
 
 export default function Recomended() {
   return (
-    <div className="h-screen relative">
+    <div className="min-h-screen relative overflow-x-hidden">
       <div className="flex justify-center mt-10">
         <div>
           <h1 className={`${zendots.className} text-lg text-center`}>
@@ -72,11 +72,6 @@ export default function Recomended() {
           ))}
         </div>
       </section>
-      <h1
-        className={`${zendots.className} text-4xl float-rantauwers rotate-90 absolute -right-52 top-80`}
-      >
-        RANTAUWERS
-      </h1>
       <h1
         className={`${zendots.className} text-lg float-rantauwers absolute left-20 bottom-20`}
       >

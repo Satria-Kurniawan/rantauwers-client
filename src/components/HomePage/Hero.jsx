@@ -19,9 +19,9 @@ export default function Hero() {
         width={1280}
         height={720}
         alt="room"
-        className="absolute md:top-0 bottom-0 right-0 w-[60vw] md:h-[93vh] h-[25vh] md:rounded-bl-3xl rounded-tl-3xl"
+        className="absolute md:top-0 bottom-0 right-0 w-[60vw] md:h-[93vh] h-[25vh] md:rounded-bl-3xl rounded-bl-none md:rounded-tl-none rounded-tl-3xl"
       />
-      <section className="relative md:pt-40 pt-10 leading-[1] z-10">
+      <section className="relative w-full overflow-hidden md:pt-40 pt-10 leading-[1] z-10">
         <h2 className="text-[4rem]">FIND YOUR</h2>
         <h2 className="text-[5rem] font-bold">NEXT KOS</h2>
         <div className="h-2 rounded-lg w-20 bg-primary mt-3" />
@@ -41,16 +41,17 @@ export default function Hero() {
           width={300}
           height={168}
           alt="polygon"
-          className="absolute md:left-52 left-40 md:-bottom-24 bottom-40"
+          className="absolute md:left-52 left-40 md:bottom-0 bottom-40"
         />
       </section>
+
       <h1
         className={`${zendots.className} text-4xl float-rantauwers -rotate-90 absolute -left-32 top-96`}
       >
         RANTAUWERS
       </h1>
       <h1
-        className={`${zendots.className} text-xl float-rantauwers absolute left-72 bottom-3`}
+        className={`${zendots.className} md:block hidden text-xl float-rantauwers absolute left-72 bottom-3`}
       >
         RANTAUWERS
       </h1>
