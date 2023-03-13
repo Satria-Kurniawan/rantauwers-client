@@ -31,6 +31,8 @@ const koss = [
     price: 900000,
     type: "Bencong",
   },
-]
+];
 
-export { koss }
+const categories = [{ name: "Putri" }, { name: "Putra" }, { name: "Campur" }];
+
+export { koss, categories };

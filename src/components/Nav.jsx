@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 import { Zen_Dots } from "next/font/google"
 import Button from "./Button"
 
@@ -29,9 +30,11 @@ export default function Nav() {
   return (
     <nav className={`w-full py-3 ${isPageScrolled ? 'backdrop-blur-md text-black' : 'text-white'} sticky top-0 z-20`}>
       <div className="container mx-auto md:px-10 px-5 flex items-center justify-between">
-        <h1 className={`${zendots.className} text-xl uppercase text-stroke text-black -z-10`}>
-          Rantauwers
-        </h1>
+        <Link href={'/'}>
+          <h1 className={`${zendots.className} text-xl uppercase text-stroke text-black -z-10`}>
+            Rantauwers
+          </h1>
+        </Link>
         <ul className={`md:inline-flex hidden items-center gap-x-3 ${!isHomePage && 'text-black'}`}>
           <li>Gabung Jadi Mitra</li>
           <li>Contact</li>

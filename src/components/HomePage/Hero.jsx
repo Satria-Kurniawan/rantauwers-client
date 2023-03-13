@@ -1,3 +1,6 @@
+'use client'
+
+import Link from "next/link"
 import Image from "next/image"
 import { Space_Mono, Zen_Dots } from "next/font/google"
 
@@ -29,13 +32,15 @@ export default function Hero() {
           Rantauwers merupakan solusi cerdas bagi anda para pencari kos maupun
           pemilik usaha kos dengan menyediakan jaringan sosial yang lebih sosial
         </p>
-        <Image
-          src={"/assets/explore.png"}
-          width={300}
-          height={168}
-          alt="expore button"
-          className="w-32 mt-5"
-        />
+        <Link href={'/explore'}>
+          <Image
+            src={"/assets/explore.png"}
+            width={300}
+            height={168}
+            alt="expore button"
+            className="w-32 mt-5 cursor-pointer"
+          />
+        </Link>
         <Image
           src={"/assets/polygon.png"}
           width={300}
