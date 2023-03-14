@@ -35,4 +35,11 @@ const koss = [
 
 const categories = [{ name: "Putri" }, { name: "Putra" }, { name: "Campur" }];
 
-export { koss, categories };
+const userSidebarLinks = [
+  { name: "Profil Saya", path: "/user/my-profile" },
+  { name: "Kos Saya", path: "/user/my-kos" },
+  { name: "Riwayat Booking", path: "/user/booking-history" },
+  { name: "Riwayat Kos", path: "/user/kos-history" },
+];
+
+export { koss, categories, userSidebarLinks };

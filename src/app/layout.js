@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import Nav from "@/components/Nav";
+import Header from "@/components/Header";
 
 export const metadata = {
   title: "Create Next App",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={poppins.className}>
         <Nav />
+        <Header />
         <div className="container mx-auto md:px-10 px-5">{children}</div>
       </body>
     </html>

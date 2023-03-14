@@ -19,16 +19,23 @@ export default function Nav() {
   }, [pathname])
 
   useEffect(() => {
-    const onPageScroll = document.addEventListener('scroll', () => {
-      window.scrollY > 30 ? setIsPageScrolled(true) : setIsPageScrolled(false)
-    })
+    const onPageScroll = () => {
+      if (window.scrollY > 50) {
+        setIsPageScrolled(true)
+      } else {
+        setIsPageScrolled(false)
+      }
+    }
 
-    return () => document.removeEventListener('scroll', onPageScroll)
+    window.addEventListener('scroll', onPageScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', onPageScroll)
+    }
   }, [isPageScrolled])
 
-
   return (
-    <nav className={`w-full py-3 ${isPageScrolled ? 'backdrop-blur-md text-black' : 'text-white'} sticky top-0 z-20`}>
+    <nav className={`w-full py-3 ${isPageScrolled ? 'bg-white text-black border-b' : 'text-white'} sticky top-0 z-30`}>
       <div className="container mx-auto md:px-10 px-5 flex items-center justify-between">
         <Link href={'/'}>
           <h1 className={`${zendots.className} text-xl uppercase text-stroke text-black -z-10`}>
@@ -39,12 +46,11 @@ export default function Nav() {
           <li>Gabung Jadi Mitra</li>
           <li>Contact</li>
           <li>About Us</li>
-          <Button text={"Masuk"} className={`border ${isHomePage ? !isPageScrolled ? 'border-white' : 'border-black text-black' : 'border-primary text-primary'}`} />
+          <Button text={"Masuk"} className={`border ${isHomePage ? !isPageScrolled ? 'border-white' : 'border-primary text-primary' : 'border-primary text-primary'}`} />
           <Button text={"Daftar"} isPrimary={true} className="text-white" />
         </ul>
 
         <div className='md:hidden block'>
-
           <svg onClick={() => setIsNavOpen(!isNavOpen)} className={`w-16 ham hamRotate ham8 z-[30] ${isNavOpen && 'active'}`} viewBox="0 0 100 100" width="80">
             <path className="line top" d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20" />
             <path className="line middle" d="m 30,50 h 40" />

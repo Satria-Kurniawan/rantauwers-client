@@ -10,8 +10,8 @@ export default function Explore() {
   const router = useRouter();
 
   return (
-    <main className="mt-10">
-      <div className="flex gap-x-3 justify-evenly sticky top-16 z-20">
+    <main>
+      <div className="flex gap-x-3 justify-evenly">
         <div className="relative">
           <input
             type="text"
@@ -29,7 +29,7 @@ export default function Explore() {
           </div>
         ))}
       </div>
-      <div className="grid md:grid-cols-4 gap-5 mt-5">
+      <div className="grid md:grid-cols-4 gap-5 mt-7">
         {koss.map((kos, i) => (
           <div onClick={() => router.push(`${kos.name}/kos`)} key={i}>
             <div className="relative mb-5 z-10">
@@ -60,7 +60,7 @@ export default function Explore() {
           </div>
         ))}
       </div>
-      <div className="grid md:grid-cols-4 gap-5 mt-5">
+      <div className="grid md:grid-cols-4 gap-5 mt-7">
         {koss.map((kos, i) => (
           <div onClick={() => router.push(`${kos.name}/kos`)} key={i}>
             <div className="relative mb-5 z-10">
