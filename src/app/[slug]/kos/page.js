@@ -1,11 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { MdLocationPin } from "react-icons/md";
+import { idrFormat } from "@/utils/idrFormat";
+import { MdLocationPin, MdArrowDropDown } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import Button from "@/components/Button";
+import Dropdown from "@/components/Dropdown";
+import Modal from "@/components/Modal";
+import { kosDurations } from "@/constants";
 
 export default function KosDetail() {
+  const [kosDuration, setKosDuration] = useState("Pilih Durasi");
+  const [kosStartDate, setKosStartDate] = useState(null);
+
   return (
     <main>
       <div className="flex h-[70vh] relative">
@@ -102,22 +110,45 @@ export default function KosDetail() {
         </div>
         <div className="w-[32vw]">
           <div className="bg-white rounded-lg p-5 sticky top-[9.5rem]">
-            <h1 className="text-2xl font-semibold">
-              Rp. 900.000 <span className="text-info text-sm">/bulan</span>
-            </h1>
+            <div className="text-2xl font-semibold">
+              <span>{idrFormat(900000)}</span>
+              <span className="text-info text-sm"> /bulan</span>
+            </div>
             <div className="flex gap-x-3 mt-5">
-              <div className="w-full">
+              <div className="w-1/2">
                 <label htmlFor="date-input">Mulai Tanggal</label>
                 <br />
                 <input
                   id="date-input"
                   type="date"
-                  className="border rounded-lg py-1.5 px-4"
+                  className="border rounded-lg py-1.5 px-2"
+                  onChange={(e) => setKosStartDate(e.target.value)}
                 />
               </div>
-              <div className="w-full">
-                <label>Durasi</label>
-                <div className="border rounded-lg py-1.5 px-4">Perbulan</div>
+              <div className="w-1/2">
+                <label>Durasi Sewa</label>
+                <Dropdown>
+                  <Dropdown.Trigger className="w-full border py-1.5 px-4 flex justify-between items-center">
+                    <span>{kosDuration}</span>
+                    <span>
+                      <MdArrowDropDown size={25} />
+                    </span>
+                  </Dropdown.Trigger>
+
+                  <Dropdown.Content className="w-[10rem] right-0">
+                    <ul className="flex flex-col gap-y-1 py-2">
+                      {kosDurations.map((duration, i) => (
+                        <li
+                          key={i}
+                          onClick={() => setKosDuration(duration)}
+                          className="cursor-pointer rounded-md hover:bg-primary hover:text-white"
+                        >
+                          <span className="py-1.5 px-3">{duration}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </Dropdown.Content>
+                </Dropdown>
               </div>
             </div>
             <div className="mt-5">
@@ -125,11 +156,33 @@ export default function KosDetail() {
                 text={"Chat Pemilik"}
                 className="w-full border border-primary text-primary"
               />
-              <Button
-                text={"Ajukan Sewa"}
-                isPrimary={true}
-                className="w-full mt-2"
-              />
+              <Modal>
+                <Modal.Trigger>
+                  <Button
+                    text={"Ajukan Sewa"}
+                    isPrimary={true}
+                    className="w-full mt-2"
+                  />
+                </Modal.Trigger>
+                <Modal.Content>
+                  <div className="flex gap-x-5">
+                    <Image
+                      src={"/assets/koss/1.jpg"}
+                      width={1280}
+                      height={720}
+                      alt="kos detail"
+                      className="w-[10rem] rounded-lg"
+                    />
+                    <div>
+                      <h2 className="font-semibold">Kos Songan</h2>
+                      <h3>Jalan Raya Gang Buntu Nomer Togel</h3>
+                      <h1 className="text-lg font-semibold">
+                        {idrFormat(900000)}
+                      </h1>
+                    </div>
+                  </div>
+                </Modal.Content>
+              </Modal>
             </div>
           </div>
         </div>

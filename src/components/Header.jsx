@@ -25,14 +25,12 @@ export default function Header() {
         }
     }, [isPageScrolled])
 
-    if (pathname === '/') {
-        return null
-    }
+    if (pathname === '/') return null
 
     return <header className={`py-7 sticky top-[3.9rem] z-20 ${isPageScrolled && 'bg-white'}`}>
         <div className="container mx-auto px-10">
             <div className="flex gap-x-3 items-center">
-                <span><Link href={'/'}>Home</Link></span>
+                <div><Link href={'/'}>Home</Link></div>
                 <span><FaChevronRight /></span>
                 <span className="capitalize font-semibold">{pathname.split('/')[1]}</span>
             </div>

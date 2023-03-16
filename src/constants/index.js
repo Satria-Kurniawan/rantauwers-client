@@ -31,6 +31,38 @@ const koss = [
     price: 900000,
     type: "Bencong",
   },
+  {
+    name: "Kos Julian",
+    address: "Jalan Raya Gang Buntu Nomer Togel",
+    facilities: ["Wifi", "Kasur", "Lemari", "Meja"],
+    image: "/assets/koss/1.jpg",
+    price: 900000,
+    type: "Campur",
+  },
+  {
+    name: "Kos Julian",
+    address: "Jalan Raya Gang Buntu Nomer Togel",
+    facilities: ["Wifi", "Kasur", "Lemari", "Meja"],
+    image: "/assets/koss/1.jpg",
+    price: 900000,
+    type: "Campur",
+  },
+  {
+    name: "Kos Julian",
+    address: "Jalan Raya Gang Buntu Nomer Togel",
+    facilities: ["Wifi", "Kasur", "Lemari", "Meja"],
+    image: "/assets/koss/1.jpg",
+    price: 900000,
+    type: "Campur",
+  },
+  {
+    name: "Kos Julian",
+    address: "Jalan Raya Gang Buntu Nomer Togel",
+    facilities: ["Wifi", "Kasur", "Lemari", "Meja"],
+    image: "/assets/koss/1.jpg",
+    price: 900000,
+    type: "Campur",
+  },
 ];
 
 const categories = [{ name: "Putri" }, { name: "Putra" }, { name: "Campur" }];
@@ -42,4 +74,6 @@ const userSidebarLinks = [
   { name: "Riwayat Kos", path: "/user/kos-history" },
 ];
 
-export { koss, categories, userSidebarLinks };
+const kosDurations = ["Perminggu", "Perbulan", "Per 6 Bulan", "Pertahun"];
+
+export { koss, categories, userSidebarLinks, kosDurations };

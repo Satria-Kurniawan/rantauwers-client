@@ -54,8 +54,8 @@ export default function Explore() {
               ))}
             </div>
             <div className="font-semibold mt-2">
-              {idrFormat(kos.price)}{" "}
-              <span className="text-info font-normal text-sm">/bulan</span>
+              <span>{idrFormat(kos.price)}</span>
+              <span className="text-info font-normal text-sm"> /bulan</span>
             </div>
           </div>
         ))}
@@ -85,8 +85,8 @@ export default function Explore() {
               ))}
             </div>
             <div className="font-semibold mt-2">
-              {idrFormat(kos.price)}{" "}
-              <span className="text-info font-normal text-sm">/bulan</span>
+              <span>{idrFormat(kos.price)}</span>
+              <span className="text-info font-normal text-sm"> /bulan</span>
             </div>
           </div>
         ))}

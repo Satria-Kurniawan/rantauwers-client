@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
         <Nav />
         <Header />
         <div className="container mx-auto md:px-10 px-5">{children}</div>
+        <div id="modal-root" />
       </body>
     </html>
   );
