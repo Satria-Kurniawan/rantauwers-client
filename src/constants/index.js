@@ -76,4 +76,65 @@ const userSidebarLinks = [
 
 const kosDurations = ["Perminggu", "Perbulan", "Per 6 Bulan", "Pertahun"];
 
-export { koss, categories, userSidebarLinks, kosDurations };
+const inputsForLogin = [
+  {
+    label: "Email",
+    type: "email",
+    name: "email",
+    placeholder: "Email",
+    errorMessage: "Email address tidak valid!",
+    required: true,
+  },
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    placeholder: "Password",
+    errorMessage: "Password wajib diisi!",
+    required: true,
+  },
+];
+
+const inputsForRegister = [
+  {
+    label: "Name",
+    type: "text",
+    name: "name",
+    placeholder: "Nama",
+    errorMessage: "Nama wajib diisi!",
+    required: true,
+  },
+  {
+    label: "Email",
+    type: "email",
+    name: "email",
+    placeholder: "Email",
+    errorMessage: "Email address tidak valid!",
+    required: true,
+  },
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    placeholder: "Password",
+    errorMessage: "Password wajib diisi!",
+    required: true,
+  },
+  {
+    label: "Password Confirmation",
+    type: "password",
+    name: "passwordConfirmation",
+    placeholder: "Konfirmasi Password",
+    errorMessage: "Konfirmasi password wajib diisi!",
+    required: true,
+  },
+];
+
+export {
+  koss,
+  categories,
+  userSidebarLinks,
+  kosDurations,
+  inputsForLogin,
+  inputsForRegister,
+};
