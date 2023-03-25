@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Zen_Dots } from "next/font/google";
@@ -8,6 +11,18 @@ import { inputsForRegister } from "@/constants";
 const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
 
 export default function SignUp() {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log(values);
+  };
+
   return (
     <main className="h-screen flex">
       <div className="w-[40%] p-10 pr-20">
@@ -19,9 +34,15 @@ export default function SignUp() {
           <h2 className="text-info mb-10">
             Selamat datang, silahkan daftarkan akun anda
           </h2>
-          <form>
+          <form onSubmit={handleRegister}>
             {inputsForRegister.map((input, i) => (
-              <TextInput key={i} {...input} />
+              <TextInput
+                key={i}
+                {...input}
+                onChange={(e) =>
+                  setValues({ ...values, [e.target.name]: e.target.value })
+                }
+              />
             ))}
             <Button
               text={"Register"}
@@ -32,7 +53,7 @@ export default function SignUp() {
             <div className="text-center text-sm mt-5">
               <span>Sudah punya akun? </span>
               <span className="font-medium">
-                <Link href={"/auth/sign-in"}>Masuk Disini</Link>
+                <Link href={"/accounts/sign-in"}>Masuk Disini</Link>
               </span>
             </div>
           </form>

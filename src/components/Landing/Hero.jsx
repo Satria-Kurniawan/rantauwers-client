@@ -1,11 +1,19 @@
-'use client'
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { Space_Mono, Zen_Dots } from "next/font/google"
+import Link from "next/link";
+import Image from "next/image";
+import { Space_Mono, Zen_Dots } from "next/font/google";
 
-const spacemono = Space_Mono({ subsets: ["latin"], weight: ["400"] })
-const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] })
+const spacemono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  fallback: ["system-ui", "arial"],
+});
+const zendots = Zen_Dots({
+  subsets: ["latin"],
+  weight: ["400"],
+  fallback: ["system-ui", "arial"],
+});
 
 export default function Hero() {
   return (
@@ -32,7 +40,7 @@ export default function Hero() {
           Rantauwers merupakan solusi cerdas bagi anda para pencari kos maupun
           pemilik usaha kos dengan menyediakan jaringan sosial yang lebih sosial
         </p>
-        <Link href={'/explore'}>
+        <Link href={"/explore"}>
           <Image
             src={"/assets/explore.png"}
             width={300}
@@ -61,5 +69,5 @@ export default function Hero() {
         RANTAUWERS
       </h1>
     </div>
-  )
+  );
 }

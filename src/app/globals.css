@@ -33,7 +33,7 @@ body {
 }
 
 .line {
-  fill:none;
+  fill: none;
   transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
   stroke: #000;
   stroke-width: 4;
@@ -62,4 +62,12 @@ body {
 }
 .ham8.active .bottom {
   stroke-dashoffset: -64px;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #8f00ff;
 }

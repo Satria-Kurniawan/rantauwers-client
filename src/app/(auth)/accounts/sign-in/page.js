@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Zen_Dots } from "next/font/google";
@@ -9,6 +14,30 @@ import { inputsForLogin } from "@/constants";
 const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
 
 export default function SignIn() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = values;
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const response = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (!response.ok) return console.log(response);
+
+    router.push(searchParams.get("callbackUrl")) || router.push("/");
+  };
+
   return (
     <main className="h-screen flex">
       <div className="w-[40%] p-10 pr-20">
@@ -32,9 +61,15 @@ export default function SignIn() {
             <span className="text-info">OR</span>
             <hr className="w-full" />
           </div>
-          <form>
+          <form onSubmit={handleLogin}>
             {inputsForLogin.map((input, i) => (
-              <TextInput key={i} {...input} />
+              <TextInput
+                key={i}
+                {...input}
+                onChange={(e) =>
+                  setValues({ ...values, [e.target.name]: e.target.value })
+                }
+              />
             ))}
             <h6 className="text-end text-sm font-medium my-5">Lupa Password</h6>
             <Button
@@ -45,9 +80,9 @@ export default function SignIn() {
             />
             <div className="text-center text-sm mt-5">
               <span>Belum punya akun? </span>
-              <span className="font-medium">
-                <Link href={"/auth/sign-up"}>Daftar gratis disini</Link>
-              </span>
+              <Link href={"/accounts/sign-up"}>
+                <span className="font-medium">Daftar gratis disini</span>
+              </Link>
             </div>
           </form>
         </div>

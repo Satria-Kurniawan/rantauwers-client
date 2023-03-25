@@ -135,15 +135,15 @@ export default function KosDetail() {
                     </span>
                   </Dropdown.Trigger>
 
-                  <Dropdown.Content className="w-[10rem] right-0">
-                    <ul className="flex flex-col gap-y-1 py-2">
+                  <Dropdown.Content className="w-[10rem]">
+                    <ul>
                       {kosDurations.map((duration, i) => (
                         <li
                           key={i}
                           onClick={() => setKosDuration(duration)}
-                          className="cursor-pointer rounded-md hover:bg-primary hover:text-white"
+                          className="px-3 py-2 cursor-pointer rounded-md hover:bg-white hover:text-black"
                         >
-                          <span className="py-1.5 px-3">{duration}</span>
+                          <span>{duration}</span>
                         </li>
                       ))}
                     </ul>

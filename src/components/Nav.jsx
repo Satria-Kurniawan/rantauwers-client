@@ -1,14 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { signIn, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Zen_Dots } from "next/font/google";
+import { FaUserCircle } from "react-icons/fa";
+import { MdHelp } from "react-icons/md";
+import { RiLogoutCircleRFill } from "react-icons/ri";
 import Button from "./Button";
+import Dropdown from "./Dropdown";
 
 const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
 
-export default function Nav() {
+export default function Nav({ session }) {
+  console.log(session);
   const pathname = usePathname();
   const [isHomePage, setIsHomePage] = useState(false);
   const [isPageScrolled, setIsPageScrolled] = useState(false);
@@ -42,11 +48,11 @@ export default function Nav() {
     >
       <div className="container mx-auto md:px-10 px-5 flex items-center justify-between">
         <Link href={"/"}>
-          <h1
+          <div
             className={`${zendots.className} text-xl uppercase text-stroke text-black -z-10`}
           >
             Rantauwers
-          </h1>
+          </div>
         </Link>
         <ul
           className={`md:inline-flex hidden items-center gap-x-3 ${
@@ -56,21 +62,69 @@ export default function Nav() {
           <li>Gabung Jadi Mitra</li>
           <li>Contact</li>
           <li>About Us</li>
-          <Link href={"/auth/sign-in"}>
-            <Button
-              text={"Masuk"}
-              className={`border ${
-                isHomePage
-                  ? !isPageScrolled
-                    ? "border-white"
-                    : "border-primary text-primary"
-                  : "border-primary text-primary"
-              }`}
-            />
-          </Link>
-          <Link href={"/auth/sign-up"}>
-            <Button text={"Daftar"} isPrimary={true} className="text-white" />
-          </Link>
+          {session ? (
+            <>
+              <Dropdown>
+                <Dropdown.Trigger>
+                  {session.user.avatar ? (
+                    ""
+                  ) : (
+                    <div className="flex gap-x-3">
+                      <span>{session.user.name}</span>
+                      <FaUserCircle size={25} />
+                    </div>
+                  )}
+                </Dropdown.Trigger>
+                <Dropdown.Content className="min-w-[12rem] mt-5">
+                  <ul>
+                    <li className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer">
+                      <span>
+                        <FaUserCircle size={25} />
+                      </span>
+                      <span>Profile</span>
+                    </li>
+                    <li className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer">
+                      <span>
+                        <MdHelp size={25} />
+                      </span>
+                      <span>Bantuan</span>
+                    </li>
+                    <li
+                      onClick={() => signOut()}
+                      className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer"
+                    >
+                      <span>
+                        <RiLogoutCircleRFill size={25} />
+                      </span>
+                      <span>Keluar</span>
+                    </li>
+                  </ul>
+                </Dropdown.Content>
+              </Dropdown>
+            </>
+          ) : (
+            <>
+              <div onClick={() => signIn()}>
+                <Button
+                  text={"Masuk"}
+                  className={`border ${
+                    isHomePage
+                      ? !isPageScrolled
+                        ? "border-white"
+                        : "border-primary text-primary"
+                      : "border-primary text-primary"
+                  }`}
+                />
+              </div>
+              <Link href={"/accounts/sign-up"}>
+                <Button
+                  text={"Daftar"}
+                  isPrimary={true}
+                  className="text-white"
+                />
+              </Link>
+            </>
+          )}
         </ul>
 
         <div className="md:hidden block">
@@ -109,13 +163,13 @@ export default function Nav() {
               <li>Contact</li>
               <li>About Us</li>
               <div className="inline-flex gap-x-3">
-                <Link href={"/auth/sign-in"}>
+                <Link href={"/accounts/sign-in"}>
                   <Button
                     text={"Masuk"}
                     className={`border border-primary text-primary`}
                   />
                 </Link>
-                <Link href={"/auth/sign-up"}>
+                <Link href={"/accounts/sign-up"}>
                   <Button
                     text={"Daftar"}
                     isPrimary={true}

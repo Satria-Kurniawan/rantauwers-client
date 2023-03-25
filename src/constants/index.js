@@ -1,3 +1,7 @@
+import { MdDashboard, MdStore } from "react-icons/md";
+import { RiFileList3Fill } from "react-icons/ri";
+import { HiDocumentText } from "react-icons/hi2";
+
 const koss = [
   {
     name: "Kos Fanny",
@@ -82,7 +86,7 @@ const inputsForLogin = [
     type: "email",
     name: "email",
     placeholder: "Email",
-    errorMessage: "Email address tidak valid!",
+    // errorMessage: "Email address tidak valid!",
     required: true,
   },
   {
@@ -90,7 +94,7 @@ const inputsForLogin = [
     type: "password",
     name: "password",
     placeholder: "Password",
-    errorMessage: "Password wajib diisi!",
+    // errorMessage: "Password wajib diisi!",
     required: true,
   },
 ];
@@ -101,7 +105,7 @@ const inputsForRegister = [
     type: "text",
     name: "name",
     placeholder: "Nama",
-    errorMessage: "Nama wajib diisi!",
+    // errorMessage: "Nama wajib diisi!",
     required: true,
   },
   {
@@ -109,7 +113,7 @@ const inputsForRegister = [
     type: "email",
     name: "email",
     placeholder: "Email",
-    errorMessage: "Email address tidak valid!",
+    // errorMessage: "Email address tidak valid!",
     required: true,
   },
   {
@@ -117,7 +121,7 @@ const inputsForRegister = [
     type: "password",
     name: "password",
     placeholder: "Password",
-    errorMessage: "Password wajib diisi!",
+    // errorMessage: "Password wajib diisi!",
     required: true,
   },
   {
@@ -125,9 +129,64 @@ const inputsForRegister = [
     type: "password",
     name: "passwordConfirmation",
     placeholder: "Konfirmasi Password",
-    errorMessage: "Konfirmasi password wajib diisi!",
+    // errorMessage: "Konfirmasi password wajib diisi!",
     required: true,
   },
+];
+
+const adminSidebarLinks = [
+  {
+    name: "Dashboard",
+    path: "/admin/dashboard",
+    icon: <MdDashboard size={25} />,
+  },
+  { name: "Merchant", path: "/admin/merchant", icon: <MdStore size={25} /> },
+  {
+    name: "Orderan",
+    path: "/admin/order-list",
+    icon: <HiDocumentText size={25} />,
+  },
+  {
+    name: "Transaction",
+    path: "/admin/transactions",
+    icon: <RiFileList3Fill size={25} />,
+  },
+];
+
+const kosTextInputs = [
+  {
+    label: "Nama Kos",
+    type: "text",
+    name: "name",
+    placeholder: "Nama Kos",
+    required: true,
+  },
+  {
+    label: "Deskripsi",
+    type: "text",
+    name: "description",
+    placeholder: "Deskripsi",
+    required: true,
+  },
+  {
+    label: "Lokasi",
+    type: "text",
+    name: "location",
+    placeholder: "Lokasi",
+    required: true,
+  },
+];
+
+const kosGeneralFacilities = [
+  "Dapur umum",
+  "Tempat parkir",
+  "Tempat jemur pakaian",
+];
+
+const kosRules = [
+  "Khusus untuk Putri",
+  "Khusus untuk Putra",
+  "Tidak untuk pasutri",
 ];
 
 export {
@@ -137,4 +196,8 @@ export {
   kosDurations,
   inputsForLogin,
   inputsForRegister,
+  adminSidebarLinks,
+  kosTextInputs,
+  kosGeneralFacilities,
+  kosRules,
 };
