@@ -2,6 +2,18 @@ import { MdDashboard, MdStore } from "react-icons/md";
 import { RiFileList3Fill } from "react-icons/ri";
 import { HiDocumentText } from "react-icons/hi2";
 
+const colors = [
+  "bg-[#DFF1DE]",
+  "bg-[#F3D4F9]",
+  "bg-[#D4E7F9]",
+  "bg-[#DDD4F9]",
+  "bg-[#FFC5F8]",
+  "bg-[#F4F4DE]",
+  "bg-[#F3CECE]",
+  "bg-[#CDF7ED]",
+  "bg-[#F3F3F3]",
+];
+
 const koss = [
   {
     name: "Kos Fanny",
@@ -248,6 +260,7 @@ const bathroomFacilities = [
 ];
 
 export {
+  colors,
   koss,
   categories,
   userSidebarLinks,

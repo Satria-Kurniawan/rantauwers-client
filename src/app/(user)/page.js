@@ -1,12 +1,15 @@
-import Hero from "@/app/(user)/(landing)/Hero";
-import Recomended from "@/app/(user)/(landing)/Recomended";
-import Testimoni from "@/app/(user)/(landing)/Testimoni";
+import Hero from "@/app/(user)/Hero";
+import Recomended from "@/app/(user)/Recomended";
+import Testimoni from "@/app/(user)/Testimoni";
+import { getAllKos } from "@/lib/httpRequests";
 
-export default function Home() {
+export default async function Home() {
+  const koses = await getAllKos();
+
   return (
     <main>
       <Hero />
-      <Recomended />
+      <Recomended koses={koses} />
       <Testimoni />
     </main>
   );

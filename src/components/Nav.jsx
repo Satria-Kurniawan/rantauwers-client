@@ -8,6 +8,7 @@ import { Zen_Dots } from "next/font/google";
 import { FaUserCircle } from "react-icons/fa";
 import { MdHelp } from "react-icons/md";
 import { RiLogoutCircleRFill } from "react-icons/ri";
+import { BsMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import Button from "./Button";
 import Dropdown from "./Dropdown";
 import Hamburger from "./Hamburger";
@@ -72,14 +73,20 @@ export default function Nav({ session }) {
           </div>
         </Link>
         <ul
-          className={`md:inline-flex hidden items-center gap-x-3 ${
+          className={`md:inline-flex hidden items-center gap-x-5 ${
             !isHomePage && "text-black"
           }`}
         >
-          <li onClick={handleDarkMode}>Dark Mode</li>
-          <li>Gabung Jadi Mitra</li>
-          <li>Contact</li>
-          <li>About Us</li>
+          <li onClick={handleDarkMode} className="cursor-pointer">
+            {isDarkMode ? (
+              <BsFillSunFill size={20} />
+            ) : (
+              <BsMoonStarsFill size={20} />
+            )}
+          </li>
+          <li className="cursor-pointer">Gabung Jadi Mitra</li>
+          <li className="cursor-pointer">Contact</li>
+          <li className="cursor-pointer">About Us</li>
           {session ? (
             <>
               <Dropdown>
@@ -160,11 +167,18 @@ export default function Nav({ session }) {
             <ul
               className={`${
                 !isNavOpen && "opacity-0"
-              } h-screen flex flex-col gap-3 justify-center items-center text-black transition delay-300 duration-700`}
+              } h-screen flex flex-col gap-y-5 justify-center items-center text-black dark:text-white transition delay-300 duration-700`}
             >
-              <li>Gabung Jadi Mitra</li>
-              <li>Contact</li>
-              <li>About Us</li>
+              <li onClick={handleDarkMode} className="cursor-pointer">
+                {isDarkMode ? (
+                  <BsFillSunFill size={20} />
+                ) : (
+                  <BsMoonStarsFill size={20} />
+                )}
+              </li>
+              <li className="cursor-pointer">Gabung Jadi Mitra</li>
+              <li className="cursor-pointer">Contact</li>
+              <li className="cursor-pointer">About Us</li>
               <div className="inline-flex gap-x-3">
                 <Link href={"/accounts/sign-in"}>
                   <Button

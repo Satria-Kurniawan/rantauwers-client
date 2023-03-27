@@ -12,12 +12,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#8F00FF",
+        primary: "#b53dff",
         info: "#999999",
         light: "#fafafa",
         dark: "#202020",
         dark2: "#2E2E2E",
-        danger: "#EE4A4A",
+        danger: "#FF8B8B",
+        success: "#A9FF9F",
       },
     },
   },

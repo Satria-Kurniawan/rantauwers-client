@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import axios from "@/lib/axios";
+import axios from "@/lib/axiosConfig";
 
 export default function useFetch() {
   const [data, setData] = useState(null);
