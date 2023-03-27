@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Zen_Dots } from "next/font/google";
 import Button from "@/components/Button";
-import TextInput from "@/components/TextInput";
+import TextInput from "@/components/Input/TextInput";
 import { inputsForRegister } from "@/constants";
 
 const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });

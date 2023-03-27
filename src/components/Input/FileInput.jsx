@@ -1,4 +1,9 @@
-export default function FileInput({ label, onChange, fileName }) {
+export default function FileInput({
+  label,
+  onChange,
+  fileName,
+  ...otherProps
+}) {
   return (
     <div>
       <label htmlFor="fileInput">
@@ -16,6 +21,7 @@ export default function FileInput({ label, onChange, fileName }) {
           type="file"
           className="hidden"
           onChange={onChange}
+          {...otherProps}
         />
       </label>
     </div>

@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Zen_Dots } from "next/font/google";
 import { FcGoogle } from "react-icons/fc";
 import Button from "@/components/Button";
-import TextInput from "@/components/TextInput";
+import TextInput from "@/components/Input/TextInput";
 import { inputsForLogin } from "@/constants";
 
 const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
@@ -64,8 +64,8 @@ export default function SignIn() {
           <form onSubmit={handleLogin}>
             {inputsForLogin.map((input, i) => (
               <TextInput
-                key={i}
                 {...input}
+                key={i}
                 onChange={(e) =>
                   setValues({ ...values, [e.target.name]: e.target.value })
                 }

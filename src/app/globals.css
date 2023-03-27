@@ -2,17 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #f6f6f6;
-}
-
 .float-rantauwers {
   color: transparent;
   -webkit-text-stroke: 0.8px black;
   opacity: 0.5;
 }
 
-.text-stroke {
+.text-stroke-black {
+  -webkit-text-stroke: 0.8px black;
+}
+
+.text-stroke-white {
   -webkit-text-stroke: 0.3px white;
 }
 
@@ -35,7 +35,6 @@ body {
 .line {
   fill: none;
   transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-  stroke: #000;
   stroke-width: 4;
   stroke-linecap: round;
 }

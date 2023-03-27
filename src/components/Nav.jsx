@@ -10,15 +10,16 @@ import { MdHelp } from "react-icons/md";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import Button from "./Button";
 import Dropdown from "./Dropdown";
+import Hamburger from "./Hamburger";
 
 const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
 
 export default function Nav({ session }) {
-  console.log(session);
   const pathname = usePathname();
   const [isHomePage, setIsHomePage] = useState(false);
   const [isPageScrolled, setIsPageScrolled] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     pathname === "/" ? setIsHomePage(true) : setIsHomePage(false);
@@ -40,16 +41,32 @@ export default function Nav({ session }) {
     };
   }, [isPageScrolled]);
 
+  useEffect(() => {
+    const storedIsDarkMode = localStorage.getItem("isDarkMode") === "true";
+    setIsDarkMode(storedIsDarkMode);
+  }, []);
+
+  const handleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    localStorage.setItem("isDarkMode", !isDarkMode);
+  };
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
+
   return (
     <nav
       className={`w-full py-3 ${
-        isPageScrolled ? "bg-white text-black border-b" : "text-white"
+        isPageScrolled
+          ? "bg-white dark:bg-dark text-black dark:text-white border-b"
+          : "text-white"
       } sticky top-0 z-30`}
     >
       <div className="container mx-auto md:px-10 px-5 flex items-center justify-between">
         <Link href={"/"}>
           <div
-            className={`${zendots.className} text-xl uppercase text-stroke text-black -z-10`}
+            className={`${zendots.className} text-xl uppercase text-stroke-white text-black -z-10`}
           >
             Rantauwers
           </div>
@@ -59,6 +76,7 @@ export default function Nav({ session }) {
             !isHomePage && "text-black"
           }`}
         >
+          <li onClick={handleDarkMode}>Dark Mode</li>
           <li>Gabung Jadi Mitra</li>
           <li>Contact</li>
           <li>About Us</li>
@@ -128,36 +146,21 @@ export default function Nav({ session }) {
         </ul>
 
         <div className="md:hidden block">
-          <svg
+          <Hamburger
             onClick={() => setIsNavOpen(!isNavOpen)}
-            className={`w-16 ham hamRotate ham8 z-[30] ${
-              isNavOpen && "active"
-            }`}
-            viewBox="0 0 100 100"
-            width="80"
-          >
-            <path
-              className="line top"
-              d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"
-            />
-            <path className="line middle" d="m 30,50 h 40" />
-            <path
-              className="line bottom"
-              d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"
-            />
-          </svg>
-
+            isOpen={isNavOpen}
+          />
           <div
             className={`${
               isNavOpen
-                ? "h-[60vh] w-[70vw] bg-white rounded-bl-3xl"
+                ? "h-screen w-full backdrop-blur-lg"
                 : "h-[0vh] w-[0vw] opacity-0 pointer-event-none overflow-hidden"
             } absolute top-0 right-0 duration-700 -z-10`}
           >
             <ul
               className={`${
                 !isNavOpen && "opacity-0"
-              } h-[60vh] flex flex-col gap-3 justify-center items-center text-black transition delay-300 duration-700`}
+              } h-screen flex flex-col gap-3 justify-center items-center text-black transition delay-300 duration-700`}
             >
               <li>Gabung Jadi Mitra</li>
               <li>Contact</li>

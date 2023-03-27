@@ -1,32 +1,32 @@
-'use client'
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { Zen_Dots } from "next/font/google"
+import Link from "next/link";
+import Image from "next/image";
+import { Zen_Dots } from "next/font/google";
 import "swiper/css";
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import Button from "../Button"
-import { koss } from "@/constants"
-import { idrFormat } from "@/utils/idrFormat"
-import { HiArrowNarrowRight, HiArrowNarrowLeft } from "react-icons/hi"
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import Button from "../../../components/Button";
+import { koss } from "@/constants";
+import { idrFormat } from "@/utils/idrFormat";
+import { HiArrowNarrowRight, HiArrowNarrowLeft } from "react-icons/hi";
 import { useEffect } from "react";
 
-const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] })
+const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
 
 export default function Recomended() {
-  const swiper = useSwiper()
+  const swiper = useSwiper();
 
   useEffect(() => {
     if (swiper) {
-      const nextButton = document.querySelector('.swiper-button-next');
-      const prevButton = document.querySelector('.swiper-button-prev');
+      const nextButton = document.querySelector(".swiper-button-next");
+      const prevButton = document.querySelector(".swiper-button-prev");
 
-      nextButton.addEventListener('click', function () {
+      nextButton.addEventListener("click", function () {
         swiper.slideNext();
       });
 
-      prevButton.addEventListener('click', function () {
+      prevButton.addEventListener("click", function () {
         swiper.slidePrev();
       });
     }
@@ -69,8 +69,8 @@ export default function Recomended() {
         <Swiper
           modules={[Navigation]}
           navigation={{
-            prevEl: '.swiper-button-prev',
-            nextEl: '.swiper-button-next',
+            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next",
           }}
           slidesPerGroup={4}
           onSwiper={(s) => {
@@ -156,5 +156,5 @@ export default function Recomended() {
         RANTAUWERS
       </h1>
     </div>
-  )
+  );
 }

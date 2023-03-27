@@ -1,10 +1,4 @@
-export default function TextInput({
-  onChange,
-  type,
-  label,
-  value,
-  ...inputProps
-}) {
+export default function TextInput({ onChange, label, value, ...inputProps }) {
   return (
     <div className="mb-5">
       <input

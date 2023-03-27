@@ -162,6 +162,13 @@ const kosTextInputs = [
     required: true,
   },
   {
+    label: "Tipe Kos",
+    type: "text",
+    name: "kosType",
+    placeholder: "Tipe Kos",
+    required: true,
+  },
+  {
     label: "Deskripsi",
     type: "text",
     name: "description",
@@ -186,7 +193,58 @@ const kosGeneralFacilities = [
 const kosRules = [
   "Khusus untuk Putri",
   "Khusus untuk Putra",
+  "Tidak boleh ribut di malam hari",
   "Tidak untuk pasutri",
+];
+
+const roomTextInputs = [
+  {
+    label: "Nama Kamar",
+    type: "text",
+    name: "name",
+    placeholder: "Nama Kamar",
+    required: true,
+  },
+  {
+    label: "Harga Sewa Perhari",
+    type: "number",
+    name: "pricePerDay",
+    placeholder: "Harga Sewa Perhari",
+    required: false,
+  },
+  {
+    label: "Harga Sewa Perminggu",
+    type: "number",
+    name: "pricePerWeek",
+    placeholder: "Harga Sewa Perminggu",
+    required: false,
+  },
+  {
+    label: "Harga Sewa Perbulan",
+    type: "number",
+    name: "pricePerMonth",
+    placeholder: "Harga Sewa Perbulan",
+    required: true,
+  },
+];
+
+const roomSpecifications = [
+  "Termasuk Listrik",
+  "Luas kamar 3 x 4 meter",
+  "Luas kamar 3 x 5 meter",
+  "Luas kamar 4 x 4 meter",
+  "Luas kamar 4 x 5 meter",
+  "Luas kamar 4 x 6 meter",
+];
+
+const roomFacilities = ["Kasur", "Lemari", "Meja", "Kursi", "Wifi"];
+
+const bathroomFacilities = [
+  "Kamar mandi dalam",
+  "Kloset duduk",
+  "Shower",
+  "Bak mandi",
+  "Bathtub",
 ];
 
 export {
@@ -200,4 +258,8 @@ export {
   kosTextInputs,
   kosGeneralFacilities,
   kosRules,
+  roomTextInputs,
+  roomSpecifications,
+  roomFacilities,
+  bathroomFacilities,
 };

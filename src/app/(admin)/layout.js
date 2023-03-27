@@ -20,10 +20,12 @@ const poppins = Poppins({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} flex gap-x-3`}>
+      <body
+        className={`${poppins.className} flex gap-x-3 bg-light dark:bg-dark dark:text-white`}
+      >
         <AuthProvider>
           <AdminSidebar />
-          <div className="m-5 p-5 border rounded-lg w-full">{children}</div>
+          <div className="m-5 w-full">{children}</div>
           <div id="modal-root" />
         </AuthProvider>
       </body>

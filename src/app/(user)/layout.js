@@ -25,7 +25,9 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body
+        className={`${poppins.className} bg-light dark:bg-dark dark:text-white`}
+      >
         <AuthProvider>
           <Nav session={session} />
           <Header />

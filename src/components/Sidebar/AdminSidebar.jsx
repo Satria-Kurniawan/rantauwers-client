@@ -1,27 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { FaBars } from "react-icons/fa";
 import { adminSidebarLinks } from "@/constants";
 import { Zen_Dots } from "next/font/google";
 import Link from "next/link";
+import Hamburger from "../Hamburger";
 
 const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
 
 export default function AdminSidebar() {
-  const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const storedIsDarkMode = localStorage.getItem("isDarkMode") === "true";
+    setIsDarkMode(storedIsDarkMode);
+  }, []);
+
+  const handleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    localStorage.setItem("isDarkMode", !isDarkMode);
+  };
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
 
   return (
-    <aside className={`${isOpen ? "w-72" : "w-20"} h-screen p-5 duration-300`}>
-      <div className="flex gap-x-5 px-2">
+    <aside
+      className={`${
+        isOpen ? "w-80" : "w-20"
+      } h-screen bg-white dark:bg-dark2 sticky top-0 p-5 duration-300`}
+    >
+      <div className="flex gap-x-3 items-center">
         <span className="cursor-pointer hover:text-primary">
-          <FaBars
-            onClick={() => setIsOpen(!isOpen)}
-            size={20}
-            className={isOpen ? "text-primary" : "rotate-[360deg] duration-300"}
-          />
+          <Hamburger onClick={() => setIsOpen(!isOpen)} isOpen={isOpen} />
         </span>
         <Link href={"/"}>
           <span
@@ -55,6 +70,7 @@ export default function AdminSidebar() {
             </Link>
           </li>
         ))}
+        <li onClick={handleDarkMode}>Dark Mode</li>
       </ul>
     </aside>
   );

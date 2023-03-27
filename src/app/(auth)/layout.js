@@ -26,7 +26,11 @@ export default async function RootLayout({ children }) {
   } else {
     return (
       <html lang="en">
-        <body className={poppins.className}>{children}</body>
+        <body
+          className={`${poppins.className} bg-light dark:bg-dark dark:text-white`}
+        >
+          {children}
+        </body>
       </html>
     );
   }

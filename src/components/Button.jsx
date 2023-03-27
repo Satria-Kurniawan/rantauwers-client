@@ -5,9 +5,11 @@ export default function Button({
   icon,
   leftIcon,
   className = "",
+  onClick,
 }) {
   return (
     <button
+      onClick={onClick}
       className={`${
         isPrimary && "border border-primary bg-primary text-white"
       } py-2 px-4 rounded-lg ${className}`}
