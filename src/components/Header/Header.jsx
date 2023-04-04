@@ -11,7 +11,7 @@ export default function Header() {
 
   useEffect(() => {
     const onPageScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 0) {
         setIsPageScrolled(true);
       } else {
         setIsPageScrolled(false);
@@ -29,7 +29,9 @@ export default function Header() {
 
   return (
     <header
-      className={`py-7 sticky top-[3rem] z-20 ${isPageScrolled && "bg-white"}`}
+      className={`py-7 sticky top-[3rem] z-20 ${
+        isPageScrolled && "bg-white dark:bg-dark2"
+      }`}
     >
       <div className="container mx-auto px-10">
         <div className="flex gap-x-3 items-center">

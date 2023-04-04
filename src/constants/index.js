@@ -87,10 +87,17 @@ const userSidebarLinks = [
   { name: "Profil Saya", path: "/user/my-profile" },
   { name: "Kos Saya", path: "/user/my-kos" },
   { name: "Riwayat Booking", path: "/user/booking-history" },
+  { name: "Pembayaran", path: "/user/my-transactions" },
   { name: "Riwayat Kos", path: "/user/kos-history" },
 ];
 
-const kosDurations = ["Perminggu", "Perbulan", "Per 6 Bulan", "Pertahun"];
+const kosDurations = [
+  "Perhari",
+  "Perminggu",
+  "Perbulan",
+  "Per 6 Bulan",
+  "Pertahun",
+];
 
 const inputsForLogin = [
   {
@@ -159,8 +166,8 @@ const adminSidebarLinks = [
     icon: <HiDocumentText size={25} />,
   },
   {
-    name: "Transaction",
-    path: "/admin/transactions",
+    name: "Transaksi",
+    path: "/admin/transaction-list",
     icon: <RiFileList3Fill size={25} />,
   },
 ];

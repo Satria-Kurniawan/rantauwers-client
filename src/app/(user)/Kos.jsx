@@ -1,5 +1,7 @@
 import useFetch from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
+import { useSpring, animated } from "@react-spring/web";
+import useMeasure from "react-use-measure";
 import Link from "next/link";
 import Image from "next/image";
 import { idrFormat } from "@/utils/idrFormat";
@@ -40,46 +42,80 @@ export default function Kos({ kos }) {
     }
   }, [data]);
 
+  const [hovered, setHovered] = useState(false);
+  const [ref, { width }] = useMeasure();
+  // const springsFill = useSpring({ width: open ? width : 0 });
+
+  const springsFill = useSpring({
+    from: {
+      width: 0,
+      backgroundColor: "transparent",
+      opacity: 0,
+    },
+    to: {
+      width: hovered ? width : 0,
+      backgroundColor: hovered ? "#b53dff" : "turquoise",
+      opacity: 0.3,
+    },
+    config: { duration: 300 },
+  });
+
   return (
     <Link href={`${kos.slug}/kos`}>
-      <div className="relative mb-5 z-10">
-        <Image
-          src={`${process.env.NEXT_PUBLIC_API_GATEWAY}/images/${kos.thumbnailImage}`}
-          width={600}
-          height={400}
-          alt="Kos-kosan"
-          className="rounded-lg h-[11rem]"
+      <div
+        ref={ref}
+        className="relative border border-dark2 rounded-lg h-[23rem]"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <animated.div
+          style={springsFill}
+          className="absolute inset-0 rounded-lg z-50"
         />
-        <div className="rounded-lg bg-primary px-3 py-0.5 text-white absolute right-5 -bottom-3">
-          {kos.kosType}
+
+        <div className="relative mb-3">
+          <Image
+            src={`${process.env.NEXT_PUBLIC_API_GATEWAY}/images/${kos.thumbnailImage}`}
+            width={600}
+            height={400}
+            alt="Kos-kosan"
+            className="rounded-t-lg h-[11rem]"
+          />
+
+          <div className="rounded-lg bg-primary px-3 py-0.5 text-white absolute right-5 -bottom-5">
+            {kos.kosType}
+          </div>
         </div>
-      </div>
-      <h1 className="font-semibold">{kos.name}</h1>
-      <h2 className="text-sm">{kos.location}</h2>
-      <div className="text-sm text-info">
-        {facilities.map((facility, i) => (
-          <span key={i} className="text-sm">
-            {facility + ", "}
-          </span>
-        ))}
-        {kos.kosGeneralFacilities.map((facility, i) => (
-          <span key={i} className="text-sm">
-            {i !== kos.kosGeneralFacilities.length - 1
-              ? facility + ", "
-              : facility}
-          </span>
-        ))}
-      </div>
-      <div className="font-semibold mt-2">
-        {cheapestRoomPrice === mostExpensiveRoomPrice ? (
-          <span>{idrFormat(cheapestRoomPrice)}</span>
-        ) : (
-          <span>
-            {idrFormat(cheapestRoomPrice)} -
-            {idrFormat(mostExpensiveRoomPrice).split("Rp")}
-          </span>
-        )}
-        <span className="text-info font-normal text-sm"> /bulan</span>
+
+        <div className="px-5 pb-3">
+          <h1 className="font-semibold">{kos.name}</h1>
+          <h2 className="text-sm">{kos.location}</h2>
+          <div className="text-sm text-info">
+            {facilities.map((facility, i) => (
+              <span key={i} className="text-sm">
+                {facility + ", "}
+              </span>
+            ))}
+            {kos.kosGeneralFacilities.map((facility, i) => (
+              <span key={i} className="text-sm">
+                {i !== kos.kosGeneralFacilities.length - 1
+                  ? facility + ", "
+                  : facility}
+              </span>
+            ))}
+          </div>
+          <div className="font-semibold mt-2">
+            {cheapestRoomPrice === mostExpensiveRoomPrice ? (
+              <span>{idrFormat(cheapestRoomPrice)}</span>
+            ) : (
+              <span>
+                {idrFormat(cheapestRoomPrice)} -
+                {idrFormat(mostExpensiveRoomPrice).split("Rp")}
+              </span>
+            )}
+            <span className="text-info font-normal text-sm"> /bulan</span>
+          </div>
+        </div>
       </div>
     </Link>
   );

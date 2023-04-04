@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { signIn, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Zen_Dots } from "next/font/google";
 import { FaUserCircle } from "react-icons/fa";
-import { MdHelp } from "react-icons/md";
-import { RiLogoutCircleRFill } from "react-icons/ri";
+import { MdDashboard, MdHelp } from "react-icons/md";
+import { RiChatHistoryFill, RiLogoutCircleRFill } from "react-icons/ri";
 import { BsMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import Button from "./Button";
 import Dropdown from "./Dropdown";
@@ -28,11 +28,7 @@ export default function Nav({ session }) {
 
   useEffect(() => {
     const onPageScroll = () => {
-      if (window.scrollY > 50) {
-        setIsPageScrolled(true);
-      } else {
-        setIsPageScrolled(false);
-      }
+      setIsPageScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", onPageScroll, { passive: true });
@@ -41,6 +37,27 @@ export default function Nav({ session }) {
       window.removeEventListener("scroll", onPageScroll);
     };
   }, [isPageScrolled]);
+
+  useLayoutEffect(() => {
+    setIsPageScrolled(false);
+    if (pathname !== "/") return;
+
+    const parallaxElement = document.getElementById("parallax");
+
+    const handleScroll = () => {
+      setIsPageScrolled(parallaxElement.scrollTop > 0);
+    };
+
+    if (parallaxElement) {
+      parallaxElement.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (parallaxElement) {
+        parallaxElement.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const storedIsDarkMode = localStorage.getItem("isDarkMode") === "true";
@@ -60,7 +77,7 @@ export default function Nav({ session }) {
     <nav
       className={`w-full py-3 ${
         isPageScrolled
-          ? "bg-white dark:bg-dark text-black dark:text-white border-b"
+          ? "bg-white dark:bg-dark2 text-black dark:text-white border-b"
           : "text-white"
       } sticky top-0 z-30`}
     >
@@ -74,7 +91,7 @@ export default function Nav({ session }) {
         </Link>
         <ul
           className={`md:inline-flex hidden items-center gap-x-5 ${
-            !isHomePage && "text-black"
+            !isHomePage && "text-black dark:text-white"
           }`}
         >
           <li onClick={handleDarkMode} className="cursor-pointer">
@@ -84,7 +101,9 @@ export default function Nav({ session }) {
               <BsMoonStarsFill size={20} />
             )}
           </li>
-          <li className="cursor-pointer">Gabung Jadi Mitra</li>
+          {(!session || !session.user.role === "admin") && (
+            <li className="cursor-pointer">Gabung Jadi Mitra</li>
+          )}
           <li className="cursor-pointer">Contact</li>
           <li className="cursor-pointer">About Us</li>
           {session ? (
@@ -102,20 +121,43 @@ export default function Nav({ session }) {
                 </Dropdown.Trigger>
                 <Dropdown.Content className="min-w-[12rem] mt-5">
                   <ul>
-                    <li className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer">
-                      <span>
-                        <FaUserCircle size={25} />
-                      </span>
-                      <span>Profile</span>
-                    </li>
-                    <li className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer">
-                      <span>
-                        <MdHelp size={25} />
-                      </span>
-                      <span>Bantuan</span>
-                    </li>
+                    <Link href={"/user/my-profile"}>
+                      <li className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer">
+                        <span>
+                          <FaUserCircle size={25} />
+                        </span>
+                        <span>Profile</span>
+                      </li>
+                    </Link>
+                    {session.user.role === "user" ? (
+                      <Link href={"/user/booking-history"}>
+                        <li className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer">
+                          <span>
+                            <RiChatHistoryFill size={25} />
+                          </span>
+                          <span>Riwayat</span>
+                        </li>
+                      </Link>
+                    ) : (
+                      <Link href={"/admin/dashboard"}>
+                        <li className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer">
+                          <span>
+                            <MdDashboard size={25} />
+                          </span>
+                          <span>Dashboard</span>
+                        </li>
+                      </Link>
+                    )}
+                    <Link href={"/"}>
+                      <li className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer">
+                        <span>
+                          <MdHelp size={25} />
+                        </span>
+                        <span>Bantuan</span>
+                      </li>
+                    </Link>
                     <li
-                      onClick={() => signOut()}
+                      onClick={() => signOut({ callbackUrl: "/" })}
                       className="px-3 py-2 rounded-md flex gap-x-3 items-center hover:bg-white hover:text-black cursor-pointer"
                     >
                       <span>

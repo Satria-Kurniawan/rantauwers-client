@@ -17,7 +17,7 @@ const poppins = Poppins({
   fallback: ["system-ui", "arial"],
 });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       >
         <AuthProvider>
           <AdminSidebar />
-          <div className="m-5 w-full">{children}</div>
+          <main className="m-5 w-full">{children}</main>
           <div id="modal-root" />
         </AuthProvider>
       </body>

@@ -55,12 +55,14 @@ import { RxCross2 } from "react-icons/rx";
 // Modal.Trigger = Trigger;
 // Modal.Content = Content;
 
-const Modal = ({ children, isOpen, setIsOpen }) => {
+const Modal = ({ children, isOpen, setIsOpen, className = "" }) => {
   if (!isOpen) return null;
 
   return createPortal(
     <>
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[20rem] bg-white dark:bg-dark rounded-lg p-5 z-[99] max-h-[90vh] overflow-auto">
+      <div
+        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[20rem] bg-white dark:bg-dark rounded-lg p-5 z-[99] max-h-[95vh] overflow-auto ${className}`}
+      >
         <div className="flex justify-end">
           <RxCross2
             onClick={() => setIsOpen(false)}

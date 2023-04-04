@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Space_Mono, Zen_Dots } from "next/font/google";
+import { useSpring, animated, useInView } from "@react-spring/web";
 
 const spacemono = Space_Mono({
   subsets: ["latin"],
@@ -16,6 +17,24 @@ const zendots = Zen_Dots({
 });
 
 export default function Hero() {
+  const [ref, inView] = useInView({
+    once: true, // Agar animasi hanya dipicu satu kali saat elemen terlihat
+  });
+
+  const springsHeroImage = useSpring({
+    from: {
+      opacity: 0,
+      transform: "translateX(100px)",
+    },
+    to: {
+      opacity: inView ? 1 : 0, // Membuat opasitas 1 saat elemen terlihat
+      transform: inView ? "translateX(0px)" : "translateX(100px)", // Membuat transisi pergeseran vertikal saat elemen terlihat
+    },
+    config: {
+      duration: 500,
+    },
+  });
+
   return (
     <div className="h-screen">
       <Image
@@ -25,14 +44,24 @@ export default function Hero() {
         alt="building"
         className="absolute top-0 left-0 w-full h-screen opacity-30"
       />
-      <Image
-        src={"/assets/hero.jpg"}
-        width={1280}
-        height={720}
-        alt="room"
-        className="absolute md:top-0 bottom-0 right-0 w-[60vw] md:h-[93vh] h-[25vh] md:rounded-bl-3xl rounded-bl-none md:rounded-tl-none rounded-tl-3xl"
-      />
-      <section className="relative w-full overflow-hidden md:pt-40 pt-10 leading-[1] z-10">
+
+      <animated.div
+        style={{ ...springsHeroImage }}
+        className="absolute md:top-0 bottom-0 right-0"
+      >
+        <Image
+          src={"/assets/hero.jpg"}
+          width={1280}
+          height={720}
+          alt="room"
+          className="md:h-[93vh] h-[25vh] w-[60vw] md:rounded-bl-3xl rounded-bl-none md:rounded-tl-none rounded-tl-3xl"
+        />
+      </animated.div>
+
+      <section
+        ref={ref}
+        className="relative w-full md:pt-40 pt-10 leading-[1] z-10"
+      >
         <h2 className="text-[4rem]">FIND YOUR</h2>
         <h2 className="text-[5rem] font-bold">NEXT KOS</h2>
         <div className="h-2 rounded-lg w-20 bg-primary mt-3" />
@@ -40,6 +69,7 @@ export default function Hero() {
           Rantauwers merupakan solusi cerdas bagi anda para pencari kos maupun
           pemilik usaha kos dengan menyediakan jaringan sosial yang lebih sosial
         </p>
+
         <Link href={"/explore"}>
           <Image
             src={"/assets/explore.png"}
@@ -54,7 +84,7 @@ export default function Hero() {
           width={300}
           height={168}
           alt="polygon"
-          className="absolute md:left-52 left-40 md:bottom-0 bottom-40"
+          className="absolute md:left-52 left-40 md:-bottom-20 bottom-40"
         />
       </section>
 

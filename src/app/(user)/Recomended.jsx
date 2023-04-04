@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Zen_Dots } from "next/font/google";
+import { ParallaxLayer } from "@react-spring/parallax";
 import { Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
@@ -15,7 +16,7 @@ const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
 export default function Recomended({ koses }) {
   const swiper = useSwiper();
   const swiperRef = useRef();
-  const [isBeginingSlide, setIsBeginingSlide] = useState(false);
+  const [isBeginingSlide, setIsBeginingSlide] = useState(true);
   const [isEndSlide, setIsEndSlide] = useState(false);
 
   useEffect(() => {
@@ -47,8 +48,10 @@ export default function Recomended({ koses }) {
     }
   };
 
+  if (!koses) return <div>Failed to load kos data.</div>;
+
   return (
-    <div className="min-h-screen relative overflow-x-hidden">
+    <div className="overflow-x-hidden">
       <div className="flex justify-center mt-10">
         <div>
           <h1 className={`${zendots.className} text-lg text-center`}>
@@ -70,19 +73,19 @@ export default function Recomended({ koses }) {
         <div className="flex justify-end gap-x-3 mb-5">
           <Button
             text={"Lihat Semua"}
-            className="border border-primary text-primary"
+            className="border border-primary text-primary z-10"
           />
           <button
             className={`swiper-button-prev h-10 w-10 rounded-full p-1 border border-primary flex justify-center items-center ${
               isBeginingSlide && "opacity-50"
-            }`}
+            } z-10`}
           >
             <HiArrowNarrowLeft color="#8F00FF" size={25} />
           </button>
           <button
             className={`swiper-button-next h-10 w-10 rounded-full p-1 bg-primary flex justify-center items-center ${
               isEndSlide && "opacity-50"
-            }`}
+            } z-10`}
           >
             <HiArrowNarrowRight color="white" size={25} />
           </button>
@@ -112,16 +115,28 @@ export default function Recomended({ koses }) {
           </div>
         </Swiper>
       </section>
-      <h1
-        className={`${zendots.className} text-lg float-rantauwers absolute left-20 bottom-20`}
-      >
-        RANTAUWERS
-      </h1>
-      <h1
-        className={`${zendots.className} text-lg float-rantauwers absolute right-80 top-32`}
-      >
-        RANTAUWERS
-      </h1>
+
+      <ParallaxLayer offset={0} speed={-0.1}>
+        <Image
+          src={"/assets/particle_1.png"}
+          alt="particle"
+          width={800}
+          height={600}
+          className="h-screen w-full absolute top-[48rem] left-0 right-0 -z-10"
+        />
+      </ParallaxLayer>
+      <ParallaxLayer offset={0} speed={0.2}>
+        <Image
+          src={"/assets/particle_2.png"}
+          alt="particle"
+          width={800}
+          height={600}
+          className="h-screen w-[95vw] absolute top-[48rem] left-7 -z-10"
+        />
+      </ParallaxLayer>
+
+      <div className="bg-dark2 h-[1px] w-full rotate-90 absolute top-[84rem] -left-[40rem] -z-20" />
+      <div className="bg-dark2 h-[1px] w-full absolute top-[64rem] left-[2.1rem] -z-20" />
     </div>
   );
 }

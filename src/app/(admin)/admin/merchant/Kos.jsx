@@ -264,6 +264,8 @@ export default function Kos({ kos }) {
     }
   }, [kosImagesAddData, setKosData]);
 
+  if (!kos) return <div>Failed to load data.</div>;
+
   return (
     <>
       <main>

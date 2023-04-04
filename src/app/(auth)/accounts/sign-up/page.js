@@ -24,7 +24,7 @@ export default function SignUp() {
   };
 
   return (
-    <main className="h-screen flex">
+    <main className="h-screen bg-white flex">
       <div className="w-[40%] p-10 pr-20">
         <Link href={"/"}>
           <h1 className={zendots.className}>RANTAUWERS</h1>

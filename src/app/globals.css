@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url(//db.onlinewebfonts.com/c/500000b38ae43ab9a1b11372480b6b48?family=DINNextW1G-Bold);
+
+body {
+  font-family: "DINNextW1G-Bold";
+}
 
 .float-rantauwers {
   color: transparent;

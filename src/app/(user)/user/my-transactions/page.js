@@ -1,18 +1,16 @@
+import { getMyTransactions } from "@/lib/httpRequests";
 import { Zen_Dots } from "next/font/google";
-import { getOrdersByCustomer } from "@/lib/httpRequests";
 import Image from "next/image";
-import Booked from "./Booked";
+import Transactions from "./Transactions";
 
 const zendots = Zen_Dots({ subsets: ["latin"], weight: ["400"] });
 
-export default async function BookingHistory() {
-  const orders = await getOrdersByCustomer();
-
-  if (!orders) return <div>Failed to load data.</div>;
+export default async function MyTransactions() {
+  const transactions = await getMyTransactions();
 
   return (
     <main>
-      <h1 className={zendots.className}>Riwayat Booking</h1>
+      <h1 className={zendots.className}>Pembayaran</h1>
       <Image
         src={"/assets/section_line.png"}
         width={300}
@@ -21,7 +19,7 @@ export default async function BookingHistory() {
         className="w-24 mt-3"
       />
       <section className="mt-5">
-        <Booked orders={orders} />
+        <Transactions transactions={transactions} />
       </section>
     </main>
   );

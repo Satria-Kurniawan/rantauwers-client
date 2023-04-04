@@ -4,7 +4,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import AuthProvider from "@/context/AuthProvider";
 import { Poppins } from "next/font/google";
 import Nav from "@/components/Nav";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 
 export const metadata = {
   title: "Create Next App",
